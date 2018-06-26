@@ -88,6 +88,14 @@ public class Batiment {
 	
 	/**
 	 * 
+	 * @param vilain
+	 */
+	public void addMechant(Mechant vilain) {
+		this.mechants.add(vilain);
+	}
+	
+	/**
+	 * 
 	 */
 	public Batiment() {
 		compteur++;
