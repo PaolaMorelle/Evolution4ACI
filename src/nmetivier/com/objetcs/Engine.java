@@ -418,15 +418,18 @@ public class Engine {
 		for (Secteur sector : Jeu.world) {
 			for (Ville city : sector.getVilles()) {
 				for (Batiment building : city.getBatiments()) {
-					System.out.println(
-							String.format(
-									"[%S] - %S \t (Ville de %S) \t (Secteur de %S)",
-									building.getID(),
-									building.getNom(),
-									city.getNom(),
-									sector.getNom()
-								)
-							);
+					for (Mechant vilain : building.getMechants()) {
+						System.out.println(
+								String.format(
+										"[%S] - %S \t (Secteur de %S) \t (Ville de %S) \t (Batiment %S)",
+										vilain.getId(),
+										vilain.getNom(),
+										sector.getNom(),
+										city.getNom(),
+										building.getNom()
+									)
+								);
+					}
 				}
 			}
 		}
@@ -435,40 +438,47 @@ public class Engine {
 	public static void showVilains(Secteur sector) {
 		for (Ville city : sector.getVilles()) {
 			for (Batiment building : city.getBatiments()) {
-				System.out.println(
-						String.format(
-								"[%S] - %S \t (Ville de %S)",
-								building.getID(),
-								building.getNom(),
-								city.getNom()
-							)
-						);
+				for (Mechant vilain : building.getMechants()) {
+					System.out.println(
+							String.format(
+									"[%S] - %S \t (Ville de %S) \t (Batiment %S)",
+									vilain.getId(),
+									vilain.getNom(),
+									city.getNom(),
+									building.getNom()
+								)
+							);
+				}
 			}
 		}
 	}
 	
 	public static void showVilains(Ville city) {
 		for (Batiment building : city.getBatiments()) {
-			int totalVilains = 0;
-			System.out.println(
-					String.format(
-							"[%S] - %S",
-							building.getID(),
-							building.getNom()
-						)
-					);
+			for (Mechant vilain : building.getMechants()) {
+				System.out.println(
+						String.format(
+								"[%S] - %S \t (Batiment %S)",
+								vilain.getId(),
+								vilain.getNom(),
+								building.getNom()
+							)
+						);
+			}
 		}
 	}
 	
 	public static void showVilains(Batiment building) {
 		int totalVilains = 0;
-		System.out.println(
-				String.format(
-						"[%S] - %S",
-						building.getID(),
-						building.getNom()
-					)
-				);
+		for (Mechant vilain : building.getMechants()) {
+			System.out.println(
+					String.format(
+							"[%S] - %S",
+							vilain.getId(),
+							vilain.getNom()
+						)
+					);
+		}
 	}
 	
 	
@@ -503,43 +513,42 @@ public class Engine {
 		return total;
 	}
 	
-	private static int countBuildings(Ville city) {
+	public static int countBuildings(Ville city) {
 		return city.getBatiments().size();
 	}
 	
-	
-	private static int countVilains() {
+	public static int countVilains() {
 		int total = 0;
 		for (Secteur sector : Jeu.world) {
 			for (Ville city : sector.getVilles()) {
 				for (Batiment building : city.getBatiments()) {
-					total += building.getMechants().length;
+					total += building.getMechants().size();
 				}	
 			}		
 		}
 		return total;
 	}
 	
-	private static int countVilains(Secteur sector) {
+	public static int countVilains(Secteur sector) {
 		int total = 0;
 		for (Ville city : sector.getVilles()) {
 			for (Batiment building : city.getBatiments()) {
-				total += building.getMechants().length;
+				total += building.getMechants().size();
 			}		
 		}
 		return total;
 	}
 	
-	private static int countVilains(Ville city) {
+	public static int countVilains(Ville city) {
 		int total = 0;
 		for (Batiment building : city.getBatiments()) {
-			total += building.getMechants().length;
+			total += building.getMechants().size();
 		}
 		return total;
 	}
 	
-	private static int countVilains(Batiment building) {
-		return building.getMechants().length;
+	public static int countVilains(Batiment building) {
+		return building.getMechants().size();
 	}
 
 
@@ -563,6 +572,18 @@ public class Engine {
 
 	public static void buildBuilding() {
 		// TODO Auto-generated method stub
+		
+	}
+
+	public static void launchFight(Mechant vilain) {
+		System.out.println("EVOLUTION -- Champs de Bataille");
+		System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++");
+		
+		// Il faut générer un nombre aléaoire pour savoir qui démarre le combat.
+		
+		while ((Jeu.player.getVie() > 0) || (vilain.getVie() > 0)) {
+			
+		}
 		
 	}
 	

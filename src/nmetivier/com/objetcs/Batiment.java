@@ -82,8 +82,8 @@ public class Batiment {
 	 * 
 	 * @return
 	 */
-	public Mechant[] getMechants() {
-		return (Mechant[]) this.mechants.toArray();
+	public ArrayList<Mechant> getMechants() {
+		return this.mechants;
 	}
 	
 	/**

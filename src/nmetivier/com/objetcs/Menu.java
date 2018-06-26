@@ -1,9 +1,7 @@
 package nmetivier.com.objetcs;
 
-import java.util.HashMap;
-import java.util.Iterator;
+import java.util.InputMismatchException;
 import java.util.Scanner;
-import java.util.Set;
 
 
 /**
@@ -44,6 +42,7 @@ public class Menu {
 	 * 
 	 */
 	public void afficherChoixMenuPrincipal() {
+		this.keyBoard = new Scanner(System.in);
 		System.out.println("EVOLUTION -- Menu Principal");
 		System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++");
 		System.out.println("");
@@ -54,11 +53,22 @@ public class Menu {
 		System.out.println("[0] Revenir en arrière");
 		System.out.println("");
 
+		byte userChoice = (byte) -1;
 		
-		// TODO : Saisie au clavier.
-		int choix = -1;
+		do {
+			userChoice = (byte) -1;
+			System.out.print("Votre choix : ");
+			try {
+				userChoice = this.keyBoard.nextByte();
+			} catch (InputMismatchException e) {
+				System.err.println("Vous n'avez pas appuyé sur un chiffre.");
+				userChoice = (byte) -1;
+				this.keyBoard.next();
+			}
+			
+		} while ((userChoice < 0) || (userChoice > 4));
 		
-		switch (choix) {
+		switch (userChoice) {
 		case 1:
 			afficherChoixMenuSecteurs();
 			break;
@@ -85,25 +95,27 @@ public class Menu {
 		System.out.println("[0] Revenir en arrière");
 		System.out.println("");
 
-		// TODO : Saisie au clavier.
-		int choix = -1;
+		byte userChoice = (byte) -1;
 		
-		switch (choix) {
+		do {
+			userChoice = (byte) -1;
+			System.out.print("Votre choix : ");
+			try {
+				userChoice = this.keyBoard.nextByte();
+			} catch (InputMismatchException e) {
+				System.err.println("Vous n'avez pas appuyé sur un chiffre.");
+				userChoice = (byte) -1;
+				this.keyBoard.next();
+			}
+			
+		} while ((userChoice < 0) || (userChoice > 1));
+		
+		switch (userChoice) {
 		case 1:
-			afficherChoixMenuSecteurs();
-			break;
-		case 2:
-			afficherChoixMenuVilles();
-			break;
-		case 3:
-			afficherChoixMenuBatiments();
-			break;
-		case 4:
-			afficherChoixMenuMechants();
+			Engine.showSectors();
 			break;
 		case 0:
-			System.exit(0);
-			break;
+			return;
 		}
 	}
 	
@@ -118,10 +130,22 @@ public class Menu {
 		System.out.println("[0] Revenir en arrière");
 		System.out.println("");
 		
-		// TODO : Saisie au clavier.
-		int choix = -1;
+		byte userChoice = (byte) -1;
 		
-		switch (choix) {
+		do {
+			userChoice = (byte) -1;
+			System.out.print("Votre choix : ");
+			try {
+				userChoice = this.keyBoard.nextByte();
+			} catch (InputMismatchException e) {
+				System.err.println("Vous n'avez pas appuyé sur un chiffre.");
+				userChoice = (byte) -1;
+				this.keyBoard.next();
+			}
+			
+		} while ((userChoice < 0) || (userChoice > 4));
+		
+		switch (userChoice) {
 		case 1:
 			afficherChoixSousMenuListerVilles();
 			break;
@@ -173,12 +197,23 @@ public class Menu {
 		System.out.println("[2] Afficher les VILLES d'un SECTEUR");
 		System.out.println("[0] Retour");
 		System.out.println("");
-		System.out.print("Votre choix : ");
+
+		byte userChoice = (byte) -1;
 		
-		// TODO : Gestion du choix au clavier.
-		int choix = -1;
+		do {
+			userChoice = (byte) -1;
+			System.out.print("Votre choix : ");
+			try {
+				userChoice = this.keyBoard.nextByte();
+			} catch (InputMismatchException e) {
+				System.err.println("Vous n'avez pas appuyé sur un chiffre.");
+				userChoice = (byte) -1;
+				this.keyBoard.next();
+			}
+			
+		} while ((userChoice < 0) || (userChoice > 2));
 		
-		switch (choix) {
+		switch (userChoice) {
 		case 1:
 			Engine.showCities();
 			break;
@@ -212,10 +247,22 @@ public class Menu {
 		System.out.println("[0] Revenir en arrière");
 		System.out.println("");
 		
-		// TODO : Saisie au clavier.
-		int choix = -1;
+		byte userChoice = (byte) -1;
 		
-		switch (choix) {
+		do {
+			userChoice = (byte) -1;
+			System.out.print("Votre choix : ");
+			try {
+				userChoice = this.keyBoard.nextByte();
+			} catch (InputMismatchException e) {
+				System.err.println("Vous n'avez pas appuyé sur un chiffre.");
+				userChoice = (byte) -1;
+				this.keyBoard.next();
+			}
+			
+		} while ((userChoice < 0) || (userChoice > 4));
+		
+		switch (userChoice) {
 		case 1:
 			afficherChoixSousMenuListerBatiments();
 			break;
@@ -265,17 +312,28 @@ public class Menu {
 		System.out.println("");
 		System.out.println("[1] Afficher tous les BATIMENTS");
 		System.out.println("[2] Afficher les BATIMENTS d'un SECTEUR");
-		System.out.println("[2] Afficher les BATIMENTS d'une VILLE");
+		System.out.println("[3] Afficher les BATIMENTS d'une VILLE");
 		System.out.println("[0] Retour");
 		System.out.println("");
-		System.out.print("Votre choix : ");
+
+		byte userChoice = (byte) -1;
 		
-		// TODO : Gestion du choix au clavier.
-		int choix = -1;
+		do {
+			userChoice = (byte) -1;
+			System.out.print("Votre choix : ");
+			try {
+				userChoice = this.keyBoard.nextByte();
+			} catch (InputMismatchException e) {
+				System.err.println("Vous n'avez pas appuyé sur un chiffre.");
+				userChoice = (byte) -1;
+				this.keyBoard.next();
+			}
+			
+		} while ((userChoice < 0) || (userChoice > 3));
 		
-		switch (choix) {
+		switch (userChoice) {
 		case 1:
-			Engine.showCities();
+			Engine.showBuildings();
 			break;
 		case 2:
 			System.out.println("EVOLUTION -- Sous-Menu Villes");
@@ -284,9 +342,21 @@ public class Menu {
 			Engine.showSectors();
 			System.out.println("[0] Retour");
 			System.out.println("");
-			System.out.print("Votre choix : ");
+
+			userChoice = (byte) -1;
 			
-			// TODO : Gestion du choix au clavier.
+			do {
+				userChoice = (byte) -1;
+				System.out.print("Votre choix : ");
+				try {
+					userChoice = this.keyBoard.nextByte();
+				} catch (InputMismatchException e) {
+					System.err.println("Vous n'avez pas appuyé sur un chiffre.");
+					userChoice = (byte) -1;
+					this.keyBoard.next();
+				}
+				
+			} while ((userChoice < 0) || (userChoice > Engine.countCities()));
 			
 //			Engine.showCities(sector);
 			break;
@@ -303,10 +373,23 @@ public class Menu {
 		System.out.println("[2] Attaquer un MECHANT");
 		System.out.println("[0] Revenir en arrière");
 		System.out.println("");
+
+		byte userChoice = (byte) -1;
 		
-		// TODO
-		int choix = -1;
-		switch (choix) {
+		do {
+			userChoice = (byte) -1;
+			System.out.print("Votre choix : ");
+			try {
+				userChoice = this.keyBoard.nextByte();
+			} catch (InputMismatchException e) {
+				System.err.println("Vous n'avez pas appuyé sur un chiffre.");
+				userChoice = (byte) -1;
+				this.keyBoard.next();
+			}
+			
+		} while ((userChoice < 0) || (userChoice > 2));
+		
+		switch (userChoice) {
 		case 1:
 			this.afficherChoixSousMenuListerMechants();
 			break;
@@ -325,16 +408,30 @@ public class Menu {
 
 	private void afficherChoixSousMenuListerMechants() {
 		// TODO Auto-generated method stub
-		
-	}
+		System.out.println("EVOLUTION -- Menu Méchants");
+		System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++");
+		System.out.println("");
+		Engine.showVilains();
+		System.out.println("");
 
-	private void afficherChoixSousMenuDemarrerCombatMechants(Secteur[] world) {
-		// TODO Auto-generated method stub
+		byte userChoice = (byte) -1;
 		
-	}
-
-	private void afficherChoixSousMenuListerMechants(Secteur[] world) {
-		// TODO Auto-generated method stub
+		do {
+			userChoice = (byte) -1;
+			System.out.print("Méchant que vous souhaitez combattre : ");
+			try {
+				userChoice = this.keyBoard.nextByte();
+			} catch (InputMismatchException e) {
+				System.err.println("Vous n'avez pas appuyé sur un chiffre.");
+				userChoice = (byte) -1;
+				this.keyBoard.next();
+			}
+			
+		} while ((userChoice < 0) || (userChoice > Engine.countVilains()));
+		
+		System.out.print("Méchant que vous souhaitez combattre : ");
+		Mechant vilain = new Mechant("Débilos", (short) 2000);
+		Engine.launchFight(vilain);
 		
 	}
 }

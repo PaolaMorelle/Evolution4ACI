@@ -12,6 +12,7 @@ public class Jeu {
 	 * 
 	 */
 	static Secteur[] world = null;
+	static Player player = null;
 	
 	/**
 	 * 
@@ -23,6 +24,7 @@ public class Jeu {
 	 */
 	public Jeu() {
 		world = Engine.createWorld();
+		player = new Player();
 		loop = false;
 	}
 	
@@ -32,6 +34,10 @@ public class Jeu {
 	public void demarrer() {
 		if (this.world == null) {
 			this.world = Engine.createWorld();
+		}
+		
+		if (this.player == null) {
+			this.player = new Player();
 		}
 
 		this.loop = true;
