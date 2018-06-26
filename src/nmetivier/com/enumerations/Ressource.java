@@ -16,4 +16,33 @@ public enum Ressource {
 		this.id = id;
 		this.nom = nom;
 	}
+	
+
+	/**
+	 * 
+	 * @param text
+	 * @return
+	 */
+	/*public static MenuSecteursActions fromString(String text) {
+		for (MenuSecteursActions menuItem : MenuSecteursActions.values()) {
+			if (menuItem.value.equalsIgnoreCase(text)) {
+				return menuItem;
+			}
+		}
+		return null;
+	}*/
+	
+	/**
+	 * 
+	 * @param id
+	 * @return
+	 */
+	/*public static MenuSecteursActions fromID(int id) {
+		for (MenuSecteursActions menuItem : MenuSecteursActions.values()) {
+			if (menuItem.getID() == id) {
+				return menuItem;
+			}
+		}
+		return null;
+	}*/
 }

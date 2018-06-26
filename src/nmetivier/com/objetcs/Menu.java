@@ -5,13 +5,6 @@ import java.util.Iterator;
 import java.util.Scanner;
 import java.util.Set;
 
-import javax.swing.undo.CannotRedoException;
-
-import nmetivier.com.enumerations.MenuBatimentsActions;
-import nmetivier.com.enumerations.MenuMechantsActions;
-import nmetivier.com.enumerations.MenuPrincipalActions;
-import nmetivier.com.enumerations.MenuSecteursActions;
-import nmetivier.com.enumerations.MenuVillesActions;
 
 /**
  * 
@@ -20,54 +13,12 @@ import nmetivier.com.enumerations.MenuVillesActions;
  */
 public class Menu {
 	
-	private MenuPrincipalActions[] menuPrincipal;
-	private MenuSecteursActions[] menuSecteurs;
-	private MenuVillesActions[] menuVilles;
-	private MenuBatimentsActions[] menuBatiments;
-	private MenuMechantsActions[] menuMechants;
-	
 	private Scanner keyBoard;
 	
 	/**
 	 * 
 	 */
 	public Menu() {
-		// On se base sur des énumérations et un HashMap pour créer les menus.
-		// On créer le menu principal.
-		this.menuPrincipal = new MenuPrincipalActions[] { 
-				MenuPrincipalActions.SECTORS,
-				MenuPrincipalActions.CITIES,
-				MenuPrincipalActions.BUILDINGS,
-				MenuPrincipalActions.VILAINS,
-				MenuPrincipalActions.EXIT
-			};
-
-		this.menuSecteurs = new MenuSecteursActions[] {
-				MenuSecteursActions.SHOW,
-				MenuSecteursActions.BACK
-			};
-
-		this.menuVilles = new MenuVillesActions[] {
-				MenuVillesActions.SHOW,
-				MenuVillesActions.DETAILS,
-				MenuVillesActions.CREATE,
-				MenuVillesActions.DESTROY,
-				MenuVillesActions.BACK
-			};
-
-		this.menuBatiments = new MenuBatimentsActions[] {
-				MenuBatimentsActions.SHOW,
-				MenuBatimentsActions.DETAILS,
-				MenuBatimentsActions.CREATE,
-				MenuBatimentsActions.DESTROY,
-				MenuBatimentsActions.BACK
-			};
-
-		this.menuMechants = new MenuMechantsActions[] {
-				MenuMechantsActions.SHOW,
-				MenuMechantsActions.ATTACK,
-				MenuMechantsActions.BACK
-			};
 		this.keyBoard = new Scanner(System.in);
 	}
 	
@@ -94,27 +45,33 @@ public class Menu {
 	 */
 	public void afficherChoixMenuPrincipal() {
 		System.out.println("EVOLUTION -- Menu Principal");
-		System.out.println("+++++++++++++++++++++++++++");
+		System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++");
 		System.out.println("");
-		for (MenuPrincipalActions menuItem : this.menuPrincipal) {
-			System.out.println("[" + menuItem.getID() + "] - " + menuItem.getValue());
-		}
+		System.out.println("[1] Gestionnaire des SECTEUR");
+		System.out.println("[2] Gestionnaire des VILLES");
+		System.out.println("[3] Gestionnaire des BATIMENTS");
+		System.out.println("[4] Gestionnaire des MECHANTS");
+		System.out.println("[0] Revenir en arrière");
+		System.out.println("");
+
 		
-		MenuPrincipalActions choix = demanderChoixUtilisateurMenuPrincipal(this.menuPrincipal, this.keyBoard);
+		// TODO : Saisie au clavier.
+		int choix = -1;
+		
 		switch (choix) {
-		case SECTORS:
+		case 1:
 			afficherChoixMenuSecteurs();
 			break;
-		case CITIES:
+		case 2:
 			afficherChoixMenuVilles();
 			break;
-		case BUILDINGS:
+		case 3:
 			afficherChoixMenuBatiments();
 			break;
-		case VILAINS:
+		case 4:
 			afficherChoixMenuMechants();
 			break;
-		case EXIT:
+		case 0:
 			System.exit(0);
 			break;
 		}
@@ -122,137 +79,255 @@ public class Menu {
 	
 	public void afficherChoixMenuSecteurs() {
 		System.out.println("EVOLUTION -- Menu Secteurs");
-		System.out.println("+++++++++++++++++++++++++++");
+		System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++");
 		System.out.println("");
-		for (MenuSecteursActions menuItem : this.menuSecteurs) {
-			System.out.println("[" + menuItem.getID() + "] - " + menuItem.getValue());
-		}
+		System.out.println("[1] Lister tout les SECTEURS");
+		System.out.println("[0] Revenir en arrière");
+		System.out.println("");
+
+		// TODO : Saisie au clavier.
+		int choix = -1;
 		
-		MenuSecteursActions choix = this.demanderChoixUtilisateurMenuSecteurs(this.menuSecteurs, this.keyBoard);
 		switch (choix) {
-		case SHOW:
-			Engine.afficherSecteurs(Jeu.world);
+		case 1:
+			afficherChoixMenuSecteurs();
 			break;
-		case BACK:
-			return;
+		case 2:
+			afficherChoixMenuVilles();
+			break;
+		case 3:
+			afficherChoixMenuBatiments();
+			break;
+		case 4:
+			afficherChoixMenuMechants();
+			break;
+		case 0:
+			System.exit(0);
+			break;
 		}
 	}
 	
 	public void afficherChoixMenuVilles() {
 		System.out.println("EVOLUTION -- Menu Villes");
-		System.out.println("+++++++++++++++++++++++++++");
+		System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++");
 		System.out.println("");
-		for (MenuVillesActions menuItem : this.menuVilles) {
-			System.out.println("[" + menuItem.getID() + "] - " + menuItem.getValue());
-		}
+		System.out.println("[1] Lister les VILLES (Toutes ou par SECTEUR)");
+		System.out.println("[2] Afficher une VILLE");
+		System.out.println("[3] Créer une VILLE");
+		System.out.println("[4] Détruire une VILLE");
+		System.out.println("[0] Revenir en arrière");
+		System.out.println("");
 		
-		MenuVillesActions choix = this.demanderChoixUtilisateurMenuVilles(this.menuVilles, this.keyBoard);
+		// TODO : Saisie au clavier.
+		int choix = -1;
+		
 		switch (choix) {
-		case SHOW:
-			this.afficherChoixSousMenuListerVilles(Jeu.world);
+		case 1:
+			afficherChoixSousMenuListerVilles();
 			break;
-		case DETAILS:
-			this.afficherChoixSousMenuDetailsVilles(Jeu.world);
+		case 2:
+			afficherChoixSousMenuDetailsVilles();
 			break;
-		case CREATE:
-			this.afficherChoixSousMenuCreerVilles(Jeu.world);
+		case 3:
+			afficherChoixSousMenuCreerVilles();
 			break;
-		case DESTROY:
-			this.afficherChoixSousMenuDetruireVilles(Jeu.world);
+		case 4:
+			afficherChoixSousMenuDetruireVilles();
 			break;
-		case BACK:
+		case 0:
 			return;
 		}
 	}
 	
-	private void afficherChoixSousMenuDetruireVilles(Secteur[] world) {
-		// TODO Auto-generated method stub
+	private void afficherChoixSousMenuDetruireVilles() {
+		System.out.println("EVOLUTION -- Sous-Menu Destruction Ville");
+		System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++");
+		System.out.println("");
+		Engine.showCities();
+		Engine.destroyCity();
 		
 	}
 
-	private void afficherChoixSousMenuCreerVilles(Secteur[] world) {
+	private void afficherChoixSousMenuCreerVilles() {
 		// TODO Auto-generated method stub
+		System.out.println("EVOLUTION -- Sous-Menu Création Ville");
+		System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++");
+		System.out.println("");
+		Engine.createCity();
 		
 	}
 
-	private void afficherChoixSousMenuDetailsVilles(Secteur[] world) {
-		// TODO Auto-generated method stub
-		
+	private void afficherChoixSousMenuDetailsVilles() {
+		System.out.println("EVOLUTION -- Sous-Menu Vue Détaillée Ville");
+		System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++");
+		System.out.println("");
+		Engine.showCities();
+//		Engine.inspectCity(city);
 	}
 
-	private void afficherChoixSousMenuListerVilles(Secteur[] world) {
-		// TODO Auto-generated method stub
+	private void afficherChoixSousMenuListerVilles() {
+		System.out.println("EVOLUTION -- Sous-Menu Villes");
+		System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++");
+		System.out.println("");
+		System.out.println("[1] Afficher toutes les VILLES");
+		System.out.println("[2] Afficher les VILLES d'un SECTEUR");
+		System.out.println("[0] Retour");
+		System.out.println("");
+		System.out.print("Votre choix : ");
+		
+		// TODO : Gestion du choix au clavier.
+		int choix = -1;
+		
+		switch (choix) {
+		case 1:
+			Engine.showCities();
+			break;
+		case 2:
+			System.out.println("EVOLUTION -- Sous-Menu Villes");
+			System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++");
+			System.out.println("");
+			Engine.showSectors();
+			System.out.println("[0] Retour");
+			System.out.println("");
+			System.out.print("Votre choix : ");
+			
+			// TODO : Gestion du choix au clavier.
+			
+//			Engine.showCities(sector);
+			break;
+		case 0:
+			return;
+		}
 		
 	}
 
 	public void afficherChoixMenuBatiments() {
 		System.out.println("EVOLUTION -- Menu Batiments");
-		System.out.println("+++++++++++++++++++++++++++");
+		System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++");
 		System.out.println("");
-		for (MenuBatimentsActions menuItem : this.menuBatiments) {
-			System.out.println("[" + menuItem.getID() + "] - " + menuItem.getValue());
-		}
+		System.out.println("[1] Lister les BATIMENTS (Tous, par SECTEUR ou par VILLE)");
+		System.out.println("[2] Afficher un BATIMENT");
+		System.out.println("[3] Créer un BATIMENT");
+		System.out.println("[4] Détruire un BATIMENT");
+		System.out.println("[0] Revenir en arrière");
+		System.out.println("");
 		
-		MenuBatimentsActions choix = this.demanderChoixUtilisateurMenuBatiments(this.menuBatiments, this.keyBoard);
+		// TODO : Saisie au clavier.
+		int choix = -1;
+		
 		switch (choix) {
-		case SHOW:
-			this.afficherChoixSousMenuListerBatiments(Jeu.world);
+		case 1:
+			afficherChoixSousMenuListerBatiments();
 			break;
-		case DETAILS:
-			this.afficherChoixSousMenuDetailsBatiments(Jeu.world);
+		case 2:
+			afficherChoixSousMenuDetailsBatiments();
 			break;
-		case CREATE:
-			this.afficherChoixSousMenuCreerBatiments(Jeu.world);
+		case 3:
+			afficherChoixSousMenuCreerBatiments();
 			break;
-		case DESTROY:
-			this.afficherChoixSousMenuDetruireBatiments(Jeu.world);
+		case 4:
+			afficherChoixSousMenuDetruireBatiments();
 			break;
-		case BACK:
+		case 0:
 			return;
 		}
+
 	}
 	
-	private void afficherChoixSousMenuDetruireBatiments(Secteur[] world) {
-		// TODO Auto-generated method stub
+	private void afficherChoixSousMenuDetruireBatiments() {
+		System.out.println("EVOLUTION -- Sous-Menu Destruction Batiment");
+		System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++");
+		System.out.println("");
+		Engine.showBuildings();
+		Engine.destroyBuilding();
 		
 	}
 
-	private void afficherChoixSousMenuCreerBatiments(Secteur[] world) {
+	private void afficherChoixSousMenuCreerBatiments() {
 		// TODO Auto-generated method stub
-		
+		System.out.println("EVOLUTION -- Sous-Menu Création Batiment");
+		System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++");
+		System.out.println("");
+		Engine.buildBuilding();
 	}
 
-	private void afficherChoixSousMenuDetailsBatiments(Secteur[] world) {
-		// TODO Auto-generated method stub
-		
+	private void afficherChoixSousMenuDetailsBatiments() {
+		System.out.println("EVOLUTION -- Sous-Menu Vue Détaillée Batiment");
+		System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++");
+		System.out.println("");
+		Engine.showBuildings();
+//		Engine.inspectBuilding(building);
 	}
 
-	private void afficherChoixSousMenuListerBatiments(Secteur[] world) {
-		// TODO Auto-generated method stub
+	private void afficherChoixSousMenuListerBatiments() {
+		System.out.println("EVOLUTION -- Sous-Menu Batiments");
+		System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++");
+		System.out.println("");
+		System.out.println("[1] Afficher tous les BATIMENTS");
+		System.out.println("[2] Afficher les BATIMENTS d'un SECTEUR");
+		System.out.println("[2] Afficher les BATIMENTS d'une VILLE");
+		System.out.println("[0] Retour");
+		System.out.println("");
+		System.out.print("Votre choix : ");
 		
+		// TODO : Gestion du choix au clavier.
+		int choix = -1;
+		
+		switch (choix) {
+		case 1:
+			Engine.showCities();
+			break;
+		case 2:
+			System.out.println("EVOLUTION -- Sous-Menu Villes");
+			System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++");
+			System.out.println("");
+			Engine.showSectors();
+			System.out.println("[0] Retour");
+			System.out.println("");
+			System.out.print("Votre choix : ");
+			
+			// TODO : Gestion du choix au clavier.
+			
+//			Engine.showCities(sector);
+			break;
+		case 0:
+			return;
+		}
 	}
 
 	public void afficherChoixMenuMechants() {
-		System.out.println("EVOLUTION -- Menu Mechants");
-		System.out.println("+++++++++++++++++++++++++++");
+		System.out.println("EVOLUTION -- Menu Méchants");
+		System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++");
 		System.out.println("");
-		for (MenuMechantsActions menuItem : this.menuMechants) {
-			System.out.println("[" + menuItem.getID() + "] - " + menuItem.getValue());
-		}
+		System.out.println("[1] Lister les MECHANTS (Tous, par SECTEUR, par VILLE ou par BATIMENT)");
+		System.out.println("[2] Attaquer un MECHANT");
+		System.out.println("[0] Revenir en arrière");
+		System.out.println("");
 		
-		MenuMechantsActions choix = this.demanderChoixUtilisateurMenuMechants(this.menuMechants, this.keyBoard);
+		// TODO
+		int choix = -1;
 		switch (choix) {
-		case SHOW:
-			this.afficherChoixSousMenuListerMechants(Jeu.world);
+		case 1:
+			this.afficherChoixSousMenuListerMechants();
 			break;
-		case ATTACK:
-			this.afficherChoixSousMenuDemarrerCombatMechants(Jeu.world);
+		case 2:
+			this.afficherChoixSousMenuDemarrerCombatMechants();
 			break;
-		case BACK:
+		case 0:
 			return;
 		}
 	}
 	
+	private void afficherChoixSousMenuDemarrerCombatMechants() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void afficherChoixSousMenuListerMechants() {
+		// TODO Auto-generated method stub
+		
+	}
+
 	private void afficherChoixSousMenuDemarrerCombatMechants(Secteur[] world) {
 		// TODO Auto-generated method stub
 		
@@ -262,93 +337,4 @@ public class Menu {
 		// TODO Auto-generated method stub
 		
 	}
-
-	/**
-	 * 
-	 * @param menu
-	 */
-	private MenuPrincipalActions demanderChoixUtilisateurMenuPrincipal(MenuPrincipalActions[] menu, Scanner keyBoardCopy) {
-		keyBoardCopy = new Scanner(System.in);
-		boolean isCorrect = false;
-		while (!isCorrect) {
-			System.out.print("Votre choix : ");
-			int userChoice = keyBoardCopy.nextInt();
-			for (MenuPrincipalActions menuItem : menu) {
-				if (menuItem.getID() == userChoice) {
-					
-					return menuItem;
-				}
-			}
-		}
-		
-		return null;
-	}
-	
-	private MenuSecteursActions demanderChoixUtilisateurMenuSecteurs(MenuSecteursActions[] menu, Scanner keyBoardCopy) {
-		keyBoardCopy = new Scanner(System.in);
-		boolean isCorrect = false;
-		while (!isCorrect) {
-			System.out.print("Votre choix : ");
-			int userChoice = keyBoard.nextInt();
-			for (MenuSecteursActions menuItem : menu) {
-				if (menuItem.getID() == userChoice) {
-					
-					return menuItem;
-				}
-			}
-		}
-		
-		return null;
-	}
-	
-	private MenuVillesActions demanderChoixUtilisateurMenuVilles(MenuVillesActions[] menu, Scanner keyBoardCopy) {
-		keyBoardCopy = new Scanner(System.in);
-		boolean isCorrect = false;
-		while (!isCorrect) {
-			System.out.print("Votre choix : ");
-			int userChoice = keyBoardCopy.nextInt();
-			for (MenuVillesActions menuItem : menu) {
-				if (menuItem.getID() == userChoice) {
-					
-					return menuItem;
-				}
-			}
-		}
-		
-		return null;
-	}
-	
-	private MenuBatimentsActions demanderChoixUtilisateurMenuBatiments(MenuBatimentsActions[] menu, Scanner keyBoardCopy) {
-		keyBoardCopy = new Scanner(System.in);
-		boolean isCorrect = false;
-		while (!isCorrect) {
-			System.out.print("Votre choix : ");
-			int userChoice = keyBoardCopy.nextInt();
-			for (MenuBatimentsActions menuItem : menu) {
-				if (menuItem.getID() == userChoice) {
-					
-					return menuItem;
-				}
-			}
-		}
-		
-		return null;
-	}
-	
-	private MenuMechantsActions demanderChoixUtilisateurMenuMechants(MenuMechantsActions[] menu, Scanner keyBoardCopy) {
-		keyBoardCopy = new Scanner(System.in);
-		boolean isCorrect = false;
-		while (!isCorrect) {
-			System.out.print("Votre choix : ");
-			int userChoice = keyBoardCopy.nextInt();
-			for (MenuMechantsActions menuItem : menu) {
-				if (menuItem.getID() == userChoice) {
-					return menuItem;
-				}
-			}
-		}
-		return null;
-	}
-	
-	
 }

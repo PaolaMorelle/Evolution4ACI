@@ -313,13 +313,13 @@ public class Engine {
 	}
 	
 	
-	public static void afficherSecteurs(Secteur[] world) {
-		for (Secteur sector : world) {
+	public static void showSectors() {
+		for (Secteur sector : Jeu.world) {
 			int totalCities = 0;
 			int totalBuildings = 0;
 			System.out.println(
 					String.format(
-							"Description du secteur %S\nNom: %S\nNombre de Villes: %S\n",
+							"[%S] - %S \t %S ville(s)",
 							sector.getID(),
 							sector.getNom(),
 							countCities(sector)
@@ -328,34 +328,173 @@ public class Engine {
 		}
 	}
 	
-	public static void afficherVilles(Secteur sector) {
+	
+	public static void showCities() {
+		for (Secteur sector : Jeu.world) {
+			for (Ville city : sector.getVilles()) {
+				int totalBuildings = 0;
+				System.out.println(
+						String.format(
+								"[%S] - %S (Secteur de %S) \t %S batiment(s)",
+								city.getID(),
+								city.getNom(),
+								sector.getNom(),
+								countBuildings(city)
+							)
+						);
+			}
+		}
+	}
+	
+	public static void showCities(Secteur sector) {
 		for (Ville city : sector.getVilles()) {
 			int totalBuildings = 0;
 			System.out.println(
 					String.format(
-							"Description du secteur %S\nNom: %S\nNombre de Batiments: %S\n",
+							"[%S] - %S \t %S batiment(s)",
 							city.getID(),
 							city.getNom(),
-							countBuildings(sector)
+							countBuildings(city)
 						)
 					);
 		}
 	}
 	
-	/**
-	 * 
-	 * @param sector
-	 * @return
-	 */
+	
+	public static void showBuildings() {
+		for (Secteur sector : Jeu.world) {
+			for (Ville city : sector.getVilles()) {
+				for (Batiment building : city.getBatiments()) {
+					System.out.println(
+							String.format(
+									"[%S] - %S \t (Secteur de %S) \t (Ville de %S) \t Génère %S \t %S mechant(s)",
+									building.getID(),
+									building.getNom(),
+									sector.getNom(),
+									city.getNom(),
+									building.getRessource(),
+									countVilains(building)
+								)
+							);
+				}
+			}
+		}
+	}
+
+	public static void showBuildings(Secteur sector) {
+		for (Ville city : sector.getVilles()) {
+			for (Batiment building : city.getBatiments()) {
+				System.out.println(
+						String.format(
+								"[%S] - %S \t (Ville de %S) \t Génère %S \t %S mechant(s)",
+								building.getID(),
+								building.getNom(),
+								city.getNom(),
+								building.getRessource(),
+								countVilains(building)
+							)
+						);
+			}
+		}
+	}
+	
+	public static void showBuildings(Ville city) {
+		for (Batiment building : city.getBatiments()) {
+			int totalVilains = 0;
+			System.out.println(
+					String.format(
+							"[%S] - %S \t Génère %S \t %S mechant(s)",
+							building.getID(),
+							building.getNom(),
+							building.getRessource(),
+							countVilains(building)
+						)
+					);
+		}
+	}
+	
+	
+	public static void showVilains() {
+		for (Secteur sector : Jeu.world) {
+			for (Ville city : sector.getVilles()) {
+				for (Batiment building : city.getBatiments()) {
+					System.out.println(
+							String.format(
+									"[%S] - %S \t (Ville de %S) \t (Secteur de %S)",
+									building.getID(),
+									building.getNom(),
+									city.getNom(),
+									sector.getNom()
+								)
+							);
+				}
+			}
+		}
+	}
+
+	public static void showVilains(Secteur sector) {
+		for (Ville city : sector.getVilles()) {
+			for (Batiment building : city.getBatiments()) {
+				System.out.println(
+						String.format(
+								"[%S] - %S \t (Ville de %S)",
+								building.getID(),
+								building.getNom(),
+								city.getNom()
+							)
+						);
+			}
+		}
+	}
+	
+	public static void showVilains(Ville city) {
+		for (Batiment building : city.getBatiments()) {
+			int totalVilains = 0;
+			System.out.println(
+					String.format(
+							"[%S] - %S",
+							building.getID(),
+							building.getNom()
+						)
+					);
+		}
+	}
+	
+	public static void showVilains(Batiment building) {
+		int totalVilains = 0;
+		System.out.println(
+				String.format(
+						"[%S] - %S",
+						building.getID(),
+						building.getNom()
+					)
+				);
+	}
+	
+	
+	public static int countCities() {
+		int total = 0;
+		for (Secteur sector : Jeu.world) {
+			total += sector.getVilles().length;
+		}
+		return total;
+	}
+	
 	public static int countCities(Secteur sector) {
 		return sector.getVilles().length;
 	}
+
 	
-	/**
-	 * 
-	 * @param sector
-	 * @return
-	 */
+	public static int countBuildings() {
+		int total = 0;
+		for (Secteur sector : Jeu.world) {
+			for (Ville city : sector.getVilles()) {
+				total += city.getBatiments().size();
+			}
+		}
+		return total;
+	}
+	
 	public static int countBuildings(Secteur sector) {
 		int total = 0;
 		for (Ville city : sector.getVilles()) {
@@ -363,4 +502,69 @@ public class Engine {
 		}
 		return total;
 	}
+	
+	private static int countBuildings(Ville city) {
+		return city.getBatiments().size();
+	}
+	
+	
+	private static int countVilains() {
+		int total = 0;
+		for (Secteur sector : Jeu.world) {
+			for (Ville city : sector.getVilles()) {
+				for (Batiment building : city.getBatiments()) {
+					total += building.getMechants().length;
+				}	
+			}		
+		}
+		return total;
+	}
+	
+	private static int countVilains(Secteur sector) {
+		int total = 0;
+		for (Ville city : sector.getVilles()) {
+			for (Batiment building : city.getBatiments()) {
+				total += building.getMechants().length;
+			}		
+		}
+		return total;
+	}
+	
+	private static int countVilains(Ville city) {
+		int total = 0;
+		for (Batiment building : city.getBatiments()) {
+			total += building.getMechants().length;
+		}
+		return total;
+	}
+	
+	private static int countVilains(Batiment building) {
+		return building.getMechants().length;
+	}
+
+
+	public static void destroyCity() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	public static void createCity() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	public static void destroyBuilding() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	public static void buildBuilding() {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	
 }
