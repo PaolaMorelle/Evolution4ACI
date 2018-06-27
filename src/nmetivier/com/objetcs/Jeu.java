@@ -12,6 +12,10 @@ public class Jeu {
 	 * 
 	 */
 	static Secteur[] world = null;
+	
+	/**
+	 * 
+	 */
 	static Player player = null;
 	
 	/**

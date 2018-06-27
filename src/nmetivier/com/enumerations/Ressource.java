@@ -23,8 +23,8 @@ public enum Ressource {
 	 * @param text
 	 * @return
 	 */
-	/*public static MenuSecteursActions fromString(String text) {
-		for (MenuSecteursActions menuItem : MenuSecteursActions.values()) {
+	/*public static Ressource fromString(String text) {
+		for (Ressource menuItem : Ressource.values()) {
 			if (menuItem.value.equalsIgnoreCase(text)) {
 				return menuItem;
 			}
@@ -37,8 +37,8 @@ public enum Ressource {
 	 * @param id
 	 * @return
 	 */
-	/*public static MenuSecteursActions fromID(int id) {
-		for (MenuSecteursActions menuItem : MenuSecteursActions.values()) {
+	/*public static Ressource fromID(int id) {
+		for (Ressource menuItem : Ressource.values()) {
 			if (menuItem.getID() == id) {
 				return menuItem;
 			}

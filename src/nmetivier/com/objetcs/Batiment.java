@@ -21,6 +21,7 @@ public class Batiment {
 	private short stock;
 	private String description;
 	private ArrayList<Mechant> mechants;
+	private int totalMechants;
 	
 	/**
 	 * On récupère l'ID du Batiment.
@@ -44,6 +45,14 @@ public class Batiment {
 	 */
 	public String getNom() {
 		return this.nom;
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public int getTotalMechants() {
+		return this.totalMechants;
 	}
 	
 	/**
@@ -92,6 +101,7 @@ public class Batiment {
 	 */
 	public void addMechant(Mechant vilain) {
 		this.mechants.add(vilain);
+		this.totalMechants = this.mechants.size();
 	}
 	
 	/**
@@ -104,6 +114,7 @@ public class Batiment {
 		System.out.print("Nom du Batiment : ");
 		this.nom = clavier.nextLine();
 		this.mechants = new ArrayList<Mechant>();
+		this.totalMechants = this.mechants.size();
 		this.ressource = Ressource.CARBURANT;
 		this.vie = 1000;
 		this.stock = 10;
@@ -119,6 +130,7 @@ public class Batiment {
 		this.id = compteur;
 		this.nom = nomBatiment;
 		this.mechants = new ArrayList<Mechant>();
+		this.totalMechants = this.mechants.size();
 		this.ressource = ressource;
 		this.vie = vie;
 		this.stock = stock;

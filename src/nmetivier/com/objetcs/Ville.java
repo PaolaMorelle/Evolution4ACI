@@ -17,6 +17,9 @@ public class Ville {
 	private String nom;
 	private ArrayList<Batiment> batiments;
 	
+	private int totalBatiments;
+	private int totalMechants;
+	
 	/**
 	 * On récupère l'ID du Ville.
 	 * @return
@@ -56,6 +59,11 @@ public class Ville {
 	 */
 	public void addBatiment(Batiment batiment) {
 		this.batiments.add(batiment);
+		this.totalBatiments = this.batiments.size();
+		this.totalMechants = 0;
+		for (Batiment buiding : this.batiments) {
+			this.totalMechants += buiding.getTotalMechants();
+		}
 	}
 	
 	/**
@@ -68,6 +76,11 @@ public class Ville {
 		System.out.print("Nom du Ville : ");
 		this.nom = clavier.nextLine();
 		this.batiments = new ArrayList<Batiment>();
+		this.totalBatiments = this.batiments.size();
+		this.totalMechants = 0;
+		for (Batiment buiding : this.batiments) {
+			this.totalMechants += buiding.getTotalMechants();
+		}
 	}
 	
 	/**
@@ -79,6 +92,11 @@ public class Ville {
 		this.id = compteur;
 		this.nom = nomVille;
 		this.batiments = new ArrayList<Batiment>();
+		this.totalBatiments = this.batiments.size();
+		this.totalMechants = 0;
+		for (Batiment buiding : this.batiments) {
+			this.totalMechants += buiding.getTotalMechants();
+		}
 	}
 	
 	/**
@@ -96,6 +114,18 @@ public class Ville {
 		else { 
 			return 0;
 		}
+	}
+	
+	public int getTotalBatiments() {
+		return this.batiments.size();
+	}
+
+	public int getTotalMechants() {
+		return this.totalMechants;
+	}
+
+	private int getLastBuilding() {
+		return -1;
 	}
 	
 }

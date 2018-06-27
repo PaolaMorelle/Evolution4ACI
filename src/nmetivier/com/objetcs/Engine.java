@@ -422,7 +422,7 @@ public class Engine {
 						System.out.println(
 								String.format(
 										"[%S] - %S \t (Secteur de %S) \t (Ville de %S) \t (Batiment %S)",
-										vilain.getId(),
+										vilain.getID(),
 										vilain.getNom(),
 										sector.getNom(),
 										city.getNom(),
@@ -442,7 +442,7 @@ public class Engine {
 					System.out.println(
 							String.format(
 									"[%S] - %S \t (Ville de %S) \t (Batiment %S)",
-									vilain.getId(),
+									vilain.getID(),
 									vilain.getNom(),
 									city.getNom(),
 									building.getNom()
@@ -459,7 +459,7 @@ public class Engine {
 				System.out.println(
 						String.format(
 								"[%S] - %S \t (Batiment %S)",
-								vilain.getId(),
+								vilain.getID(),
 								vilain.getNom(),
 								building.getNom()
 							)
@@ -474,7 +474,7 @@ public class Engine {
 			System.out.println(
 					String.format(
 							"[%S] - %S",
-							vilain.getId(),
+							vilain.getID(),
 							vilain.getNom()
 						)
 					);
