@@ -58,10 +58,8 @@ public class Attaque {
 		int damageTmp1 =  (int) ((Math.random() * ((this.degatMax+1) - this.degatMin)) + this.degatMin);
 		int damageTmp2 =  (int) ((Math.random() * ((this.degatMax+1) - this.degatMin)) + this.degatMin);
 		
-		int totalDamage = damageTmp1 + damageTmp2;
-
 		if ((damageTmp1 ==  damageTmp2) && (damageTmp1 > ((this.degatMax * 90)/100))) {
-			return totalDamage; 
+			return damageTmp1 + damageTmp2; 
 		}
 		
 		return (int) ((damageTmp1 + damageTmp2)/2); 

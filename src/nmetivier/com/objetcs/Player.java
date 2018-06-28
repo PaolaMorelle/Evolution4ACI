@@ -44,36 +44,6 @@ public class Player extends EtreVivant {
 	 */
 	private byte age;
 	
-	/**
-	 * 
-	 */
-	private byte niveau;
-	
-	/**
-	 * 
-	 */
-	private int vie;
-	
-	/**
-	 * 
-	 */
-	private int vieMax;
-	
-	/**
-	 * 
-	 */
-	private short degatsMin;
-	
-	/**
-	 * 
-	 */
-	private short degatsMax;
-	
-	/**
-	 * 
-	 */
-	private HashMap attaques; 
-	
 	/* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
 	/* PROPRIETE - ATTRIBUTS */
 	/* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */

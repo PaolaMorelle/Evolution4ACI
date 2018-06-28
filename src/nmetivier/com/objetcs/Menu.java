@@ -23,7 +23,7 @@ public class Menu {
 	/**
 	 * 
 	 */
-	public void afficherBanniere() {
+	public void showBanner() {
 		System.out.println("EVOLUTION -- Version 0.2");
 		System.out.println("========================");
 		System.out.println("");
@@ -41,7 +41,7 @@ public class Menu {
 	/**
 	 * 
 	 */
-	public void afficherChoixMenuPrincipal() {
+	public void showMainMenu() {
 		this.keyBoard = new Scanner(System.in);
 		System.out.println("EVOLUTION -- Menu Principal");
 		System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++");
@@ -70,16 +70,16 @@ public class Menu {
 		
 		switch (userChoice) {
 		case 1:
-			afficherChoixMenuSecteurs();
+			showSectorsMenu();
 			break;
 		case 2:
-			afficherChoixMenuVilles();
+			showCitiesMenu();
 			break;
 		case 3:
-			afficherChoixMenuBatiments();
+			showBuildingsMenu();
 			break;
 		case 4:
-			afficherChoixMenuMechants();
+			showVilainsMenu();
 			break;
 		case 0:
 			System.exit(0);
@@ -87,7 +87,10 @@ public class Menu {
 		}
 	}
 	
-	public void afficherChoixMenuSecteurs() {
+	/**
+	 * 
+	 */
+	public void showSectorsMenu() {
 		System.out.println("EVOLUTION -- Menu Secteurs");
 		System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++");
 		System.out.println("");
@@ -112,14 +115,21 @@ public class Menu {
 		
 		switch (userChoice) {
 		case 1:
+			System.out.println("EVOLUTION -- Liste Secteurs");
+			System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++");
 			Engine.showSectors();
+			System.out.println("");
 			break;
 		case 0:
+			System.out.println("");
 			return;
 		}
 	}
 	
-	public void afficherChoixMenuVilles() {
+	/**
+	 * 
+	 */
+	public void showCitiesMenu() {
 		System.out.println("EVOLUTION -- Menu Villes");
 		System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++");
 		System.out.println("");
@@ -147,49 +157,26 @@ public class Menu {
 		
 		switch (userChoice) {
 		case 1:
-			afficherChoixSousMenuListerVilles();
+			showCitiesSubMenuToListCities();
 			break;
 		case 2:
-			afficherChoixSousMenuDetailsVilles();
+			showCitiesSubMenuToShowDetailedCity();
 			break;
 		case 3:
-			afficherChoixSousMenuCreerVilles();
+			showCitiesSubMenuToCreateCity();
 			break;
 		case 4:
-			afficherChoixSousMenuDetruireVilles();
+			showCitiesSubMenuToDestroyCity();
 			break;
 		case 0:
 			return;
 		}
 	}
 	
-	private void afficherChoixSousMenuDetruireVilles() {
-		System.out.println("EVOLUTION -- Sous-Menu Destruction Ville");
-		System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++");
-		System.out.println("");
-		Engine.showCities();
-		Engine.destroyCity();
-		
-	}
-
-	private void afficherChoixSousMenuCreerVilles() {
-		// TODO Auto-generated method stub
-		System.out.println("EVOLUTION -- Sous-Menu Création Ville");
-		System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++");
-		System.out.println("");
-		Engine.createCity();
-		
-	}
-
-	private void afficherChoixSousMenuDetailsVilles() {
-		System.out.println("EVOLUTION -- Sous-Menu Vue Détaillée Ville");
-		System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++");
-		System.out.println("");
-		Engine.showCities();
-//		Engine.inspectCity(city);
-	}
-
-	private void afficherChoixSousMenuListerVilles() {
+	/**
+	 * 
+	 */
+	private void showCitiesSubMenuToListCities() {
 		System.out.println("EVOLUTION -- Sous-Menu Villes");
 		System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++");
 		System.out.println("");
@@ -214,8 +201,10 @@ public class Menu {
 		} while ((userChoice < 0) || (userChoice > 2));
 		
 		switch (userChoice) {
-		case 1:
+		case 1:System.out.println("EVOLUTION -- Liste Villes");
+			System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++");
 			Engine.showCities();
+			System.out.println("");
 			break;
 		case 2:
 			System.out.println("EVOLUTION -- Sous-Menu Villes");
@@ -224,19 +213,117 @@ public class Menu {
 			Engine.showSectors();
 			System.out.println("[0] Retour");
 			System.out.println("");
-			System.out.print("Votre choix : ");
+
+			do {
+				userChoice = (byte) -1;
+				System.out.print("Votre choix : ");
+				try {
+					userChoice = this.keyBoard.nextByte();
+				} catch (InputMismatchException e) {
+					System.err.println("Vous n'avez pas appuyé sur un chiffre.");
+					userChoice = (byte) -1;
+					this.keyBoard.next();
+				}
+			} while ((userChoice < 0) || (userChoice > (byte) Jeu.world.length));
 			
-			// TODO : Gestion du choix au clavier.
+			if (userChoice == 0) {
+				System.out.println("");
+				return;
+			}
 			
-//			Engine.showCities(sector);
+			Engine.showCities(Jeu.world[userChoice-1]);
+			System.out.println("");
 			break;
 		case 0:
+			System.out.println("");
 			return;
 		}
 		
 	}
 
-	public void afficherChoixMenuBatiments() {
+	/**
+	 * 
+	 */
+	private void showCitiesSubMenuToShowDetailedCity() {
+		System.out.println("EVOLUTION -- Sous-Menu Vue Détaillée Ville");
+		System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++");
+		System.out.println("");
+		Engine.showCities();
+		System.out.println("[0] Retour");
+		System.out.println("");
+		
+		byte userChoice = (byte) -1;
+		
+		do {
+			userChoice = (byte) -1;
+			System.out.print("Votre choix : ");
+			try {
+				userChoice = this.keyBoard.nextByte();
+			} catch (InputMismatchException e) {
+				System.err.println("Vous n'avez pas appuyé sur un chiffre.");
+				userChoice = (byte) -1;
+				this.keyBoard.next();
+			}
+			
+		} while ((userChoice < 0) || (userChoice > Engine.countCities()));
+		
+		if (userChoice == 0) {
+			System.out.println("");
+			return;
+		}
+		
+		Engine.inspectCity(userChoice);	// ID de la ville.
+		System.out.println("");
+	}
+	
+	/**
+	 * 
+	 */
+	private void showCitiesSubMenuToCreateCity() {
+		// TODO Auto-generated method stub
+		System.out.println("EVOLUTION -- Sous-Menu Création Ville");
+		System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++");
+		System.out.println("");
+		Engine.createCity();
+		System.out.println("");
+		
+	}
+	
+	/**
+	 * 
+	 */
+	private void showCitiesSubMenuToDestroyCity() {
+		System.out.println("EVOLUTION -- Sous-Menu Destruction Ville");
+		System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++");
+		System.out.println("");
+		Engine.showCities();
+		System.out.println("");
+		
+		byte userChoice = (byte) -1;
+		
+		do {
+			userChoice = (byte) -1;
+			System.out.print("Votre choix : ");
+			try {
+				userChoice = this.keyBoard.nextByte();
+			} catch (InputMismatchException e) {
+				System.err.println("Vous n'avez pas appuyé sur un chiffre.");
+				userChoice = (byte) -1;
+				this.keyBoard.next();
+			}
+			
+		} while ((userChoice < 0) || (userChoice > Engine.countCities()));
+		
+		if (userChoice == 0) {
+			System.out.println("");
+			return;
+		}
+		
+		Engine.destroyCity(userChoice); // City ID
+		
+	}
+	
+	public void showBuildingsMenu() {
 		System.out.println("EVOLUTION -- Menu Batiments");
 		System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++");
 		System.out.println("");
@@ -264,7 +351,7 @@ public class Menu {
 		
 		switch (userChoice) {
 		case 1:
-			afficherChoixSousMenuListerBatiments();
+			showBuildingsSubMenuToListBuildings();
 			break;
 		case 2:
 			afficherChoixSousMenuDetailsBatiments();
@@ -276,37 +363,16 @@ public class Menu {
 			afficherChoixSousMenuDetruireBatiments();
 			break;
 		case 0:
+			System.out.println("");
 			return;
 		}
 
 	}
 	
-	private void afficherChoixSousMenuDetruireBatiments() {
-		System.out.println("EVOLUTION -- Sous-Menu Destruction Batiment");
-		System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++");
-		System.out.println("");
-		Engine.showBuildings();
-		Engine.destroyBuilding();
-		
-	}
-
-	private void afficherChoixSousMenuCreerBatiments() {
-		// TODO Auto-generated method stub
-		System.out.println("EVOLUTION -- Sous-Menu Création Batiment");
-		System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++");
-		System.out.println("");
-		Engine.buildBuilding();
-	}
-
-	private void afficherChoixSousMenuDetailsBatiments() {
-		System.out.println("EVOLUTION -- Sous-Menu Vue Détaillée Batiment");
-		System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++");
-		System.out.println("");
-		Engine.showBuildings();
-//		Engine.inspectBuilding(building);
-	}
-
-	private void afficherChoixSousMenuListerBatiments() {
+	/**
+	 * 
+	 */
+	private void showBuildingsSubMenuToListBuildings() {
 		System.out.println("EVOLUTION -- Sous-Menu Batiments");
 		System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++");
 		System.out.println("");
@@ -334,38 +400,115 @@ public class Menu {
 		switch (userChoice) {
 		case 1:
 			Engine.showBuildings();
+			System.out.println("");
 			break;
 		case 2:
-			System.out.println("EVOLUTION -- Sous-Menu Villes");
-			System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++");
-			System.out.println("");
-			Engine.showSectors();
-			System.out.println("[0] Retour");
-			System.out.println("");
-
-			userChoice = (byte) -1;
-			
-			do {
-				userChoice = (byte) -1;
-				System.out.print("Votre choix : ");
-				try {
-					userChoice = this.keyBoard.nextByte();
-				} catch (InputMismatchException e) {
-					System.err.println("Vous n'avez pas appuyé sur un chiffre.");
-					userChoice = (byte) -1;
-					this.keyBoard.next();
-				}
-				
-			} while ((userChoice < 0) || (userChoice > Engine.countCities()));
-			
-//			Engine.showCities(sector);
-			break;
+			showBuildingsSubMenuToListBuildingsFromSector();
+		case 3:
+			showBuildingsSubMenuToListBuildingsFromCity();
 		case 0:
+			System.out.println("");
 			return;
 		}
 	}
+	
+	/**
+	 * 
+	 */
+	private void showBuildingsSubMenuToListBuildingsFromSector() {
+		System.out.println("EVOLUTION -- Sous-Menu Batiments");
+		System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++");
+		System.out.println("");
+		Engine.showSectors();
+		System.out.println("[0] Retour");
+		System.out.println("");
 
-	public void afficherChoixMenuMechants() {
+		byte userChoice = (byte) -1;
+		
+		do {
+			userChoice = (byte) -1;
+			System.out.print("Votre choix : ");
+			try {
+				userChoice = this.keyBoard.nextByte();
+			} catch (InputMismatchException e) {
+				System.err.println("Vous n'avez pas appuyé sur un chiffre.");
+				userChoice = (byte) -1;
+				this.keyBoard.next();
+			}
+			
+		} while ((userChoice < 0) || (userChoice > Jeu.world.length));
+		
+		if (userChoice == 0) {
+			System.out.println("");
+			return;
+		}
+
+		Engine.showBuildings(Jeu.world[userChoice-1]);
+		System.out.println("");
+	}
+	
+	
+	private void showBuildingsSubMenuToListBuildingsFromCity() {
+		System.out.println("EVOLUTION -- Sous-Menu Batiments");
+		System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++");
+		System.out.println("");
+		Engine.showCities();
+		System.out.println("[0] Retour");
+		System.out.println("");
+
+		byte userChoice = (byte) -1;
+		
+		do {
+			userChoice = (byte) -1;
+			System.out.print("Votre choix : ");
+			try {
+				userChoice = this.keyBoard.nextByte();
+			} catch (InputMismatchException e) {
+				System.err.println("Vous n'avez pas appuyé sur un chiffre.");
+				userChoice = (byte) -1;
+				this.keyBoard.next();
+			}
+			
+		} while ((userChoice < 0) || (userChoice > Engine.countCities()));
+		
+		if (userChoice == 0) {
+			System.out.println("");
+			return;
+		}
+		
+		Ville selectedCity = Engine.get
+
+		Engine.showBuildings();
+		System.out.println("");
+	}
+	
+
+	private void afficherChoixSousMenuDetailsBatiments() {
+		System.out.println("EVOLUTION -- Sous-Menu Vue Détaillée Batiment");
+		System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++");
+		System.out.println("");
+		Engine.showBuildings();
+//		Engine.inspectBuilding(building);
+	}
+
+	private void afficherChoixSousMenuCreerBatiments() {
+		// TODO Auto-generated method stub
+		System.out.println("EVOLUTION -- Sous-Menu Création Batiment");
+		System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++");
+		System.out.println("");
+		Engine.buildBuilding();
+	}
+
+	private void afficherChoixSousMenuDetruireBatiments() {
+		System.out.println("EVOLUTION -- Sous-Menu Destruction Batiment");
+		System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++");
+		System.out.println("");
+		Engine.showBuildings();
+		Engine.destroyBuilding();
+		
+	}
+
+	public void showVilainsMenu() {
 		System.out.println("EVOLUTION -- Menu Méchants");
 		System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++");
 		System.out.println("");
@@ -430,7 +573,7 @@ public class Menu {
 		} while ((userChoice < 0) || (userChoice > Engine.countVilains()));
 		
 		System.out.print("Méchant que vous souhaitez combattre : ");
-		Mechant vilain = new Mechant("Débilos", (short) 2000);
+		Mechant vilain = new Mechant("Débilos", (byte) 1);
 		Engine.launchFight(vilain);
 		
 	}

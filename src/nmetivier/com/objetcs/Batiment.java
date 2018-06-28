@@ -12,7 +12,7 @@ import nmetivier.com.enumerations.Ressource;
  *
  */
 public class Batiment {
-	private byte compteur = 0;
+	private static byte compteur = 0;
 	
 	private byte id;
 	private String nom;

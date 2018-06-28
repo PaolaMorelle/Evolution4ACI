@@ -1,5 +1,6 @@
 package nmetivier.com.objetcs;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 
@@ -10,7 +11,7 @@ import java.util.Scanner;
  *
  */
 public class Secteur {
-	private byte compteur = 0;
+	private static byte compteur = 0;
 	private byte id;
 	private String nom;
 	private ArrayList<Ville> villes;
@@ -46,7 +47,7 @@ public class Secteur {
 	 * 
 	 * @return
 	 */
-	public Ville[] getVilles() {
+	public ArrayList<Ville> getVilles() {
 		return this.villes;
 	}
 	
@@ -62,15 +63,19 @@ public class Secteur {
 	public int getTotalMechants() {
 		return this.totalMechants;
 	}
+	
+	public Ville getVille(int index) {
+		return this.villes.get(index);
+	}
 
 	
 	/**
 	 * 
 	 * @return
 	 */
-	public void addVille(int index, Ville ville) {
-		this.villes[index] = ville;
-		this.totalVilles = this.villes.length;
+	public void addVille(Ville ville) {
+		this.villes.add(ville);
+		this.totalVilles = this.villes.size();
 		
 		this.totalBatiments= 0;
 		for (Ville city : this.villes) {
@@ -95,8 +100,8 @@ public class Secteur {
 		Scanner clavier = new Scanner(System.in);
 		System.out.print("Nom du secteur : ");
 		this.nom = clavier.nextLine();
-		this.villes = new Ville[4];
-		this.totalVilles = this.villes.length;
+		this.villes = new ArrayList<Ville>();
+		this.totalVilles = this.villes.size();
 		
 		this.totalBatiments= 0;
 		for (Ville city : this.villes) {
@@ -119,9 +124,9 @@ public class Secteur {
 		compteur++;
 		this.id = compteur;
 		this.nom = nomSecteur;
-		this.villes = new Ville[4];
+		this.villes = new ArrayList<Ville>();
 
-		this.totalVilles = this.villes.length;
+		this.totalVilles = this.villes.size();
 		
 		this.totalBatiments= 0;
 		for (Ville city : this.villes) {
