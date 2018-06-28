@@ -3,18 +3,18 @@ package nmetivier.com;
 import nmetivier.com.objetcs.Jeu;
 
 /**
- * Classe principale.
+ * Classe principale. Test pour Travis.
  * @author Nicolas.Metivier
  *
  */
 public class Program {
 	
 	/**
-	 * Fonction principle, aussi appelé point d'entré.
+	 * Fonction principle, aussi appelÃ© point d'entrÃ©.
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		Jeu game = new Jeu();	// On créé le jeu.
+		Jeu game = new Jeu();	// On crÃ©Ã© le jeu.
 		game.demarrer();		// On lance le jeu.
 	}
 
